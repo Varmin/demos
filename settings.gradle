@@ -1,0 +1,6 @@
+include ':modules:modulelogin'
+include ':app:LibView'
+include ':app:demo'
+include ':app'
+include ':modules'
+rootProject.name = "Demos"
