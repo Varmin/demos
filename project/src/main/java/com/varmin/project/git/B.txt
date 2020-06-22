@@ -1,6 +1,3 @@
 another
-<<<<<<< HEAD
 yang
-=======
 another
->>>>>>> 99168f31607bf5478cdfdf84008a8141e1c41669
