@@ -1,3 +1,6 @@
+include ':app:LibArchite'
+include ':modules:modulechat'
+include ':modules:modulemain'
 include ':modules:ModuleBase'
 include ':project'
 include ':modules:modulelogin'
