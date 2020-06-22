@@ -21,6 +21,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -32,4 +33,24 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    //butterknife
+    api 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+
+
+    //rxlifecycle
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
+    //rxjava2
+    api 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    api 'io.reactivex.rxjava2:rxjava:2.2.1'
+//
+    api 'com.google.dagger:dagger:2.11'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
+//
+      //Retrofit，已默认引用OKhttp
+    api 'com.squareup.retrofit2:retrofit:2.8.0'
+    api 'com.squareup.retrofit2:converter-gson:2.8.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.8.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 }
