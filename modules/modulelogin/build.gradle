@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+if (IS_APPLICATION.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -6,7 +10,9 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.varmin.modulelogin"
+        if (IS_APPLICATION.toBoolean()) {
+            applicationId "com.varmin.modulelogin"
+        }
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -19,6 +25,16 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (IS_APPLICATION.toBoolean()) {
+                manifest.srcFile 'src/main/appManifest/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
         }
     }
 }

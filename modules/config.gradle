@@ -1,0 +1,18 @@
+ext{
+    //各个module配置BuildConfig变量
+    IS_APPLICATION = true
+    /*
+    TODO: by HY, 2020/6/11 实现任意组合（App+module、主module+modules)）
+     1. 各个build.gradle中动态依赖模块，在这里能用类似JSon的方式可视化配置
+     2. 如果有JSon则为组合配置，IS_APPLICATION失效；否则各自为单独module
+
+    {
+       module: chat,
+       is_application: true,
+       modules:[shop, mine, client]//被依赖时，该module自己的JSon配置is_application:false
+    }
+    */
+    config = [
+            testValue: true,
+    ]
+}
