@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/app/LibArchite" />
+            <option value="$PROJECT_DIR$/app/LibUtils" />
             <option value="$PROJECT_DIR$/app/LibView" />
             <option value="$PROJECT_DIR$/app/demo" />
             <option value="$PROJECT_DIR$/modules" />

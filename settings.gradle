@@ -1,3 +1,4 @@
+include ':app:LibUtils'
 include ':app:LibArchite'
 include ':modules:modulechat'
 include ':modules:modulemain'
