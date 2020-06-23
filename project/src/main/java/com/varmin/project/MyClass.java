@@ -14,6 +14,7 @@ public class MyClass {
         // TODO: by HY, 2020/6/22 不能找到Kotlin类
         //new Main().run();
         new Test().run();
+        new Test().equals(new Test());
 
         System.out.println("=======================JavaPro over=======================");
     }

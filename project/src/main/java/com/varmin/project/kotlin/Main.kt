@@ -10,7 +10,11 @@ class Main :IBase{
     override fun run() {
         var c1 = Client("Varmin", 23)
         var c2 = Client("Varmin", 23)
-        System.out.println("c1,$c1,  ${c1.toString()}, ${c1.hashCode()}")
-        System.out.println("c2,$c2,  ${c2.toString()}, ${c2.hashCode()}")
+
+        var b1 = c1.equals(c2)
+        var b2 = c1 == c2
+        var b3 = c1 === c2
+
+        System.out.println("$b1, $b2, $b3")
     }
 }
