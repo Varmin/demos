@@ -1,7 +1,7 @@
 package com.varmin.libarchite.mvp.model;
 
 
-import com.varmin.libarchite.mvp.IBaseView;
+import com.varmin.libarchite.mvp._IBaseView;
 
 /**
  * Created by HuangYang
@@ -9,9 +9,9 @@ import com.varmin.libarchite.mvp.IBaseView;
  * 文件描述：
  */
 public abstract class BaseCallbck<T> implements Callback<T, Integer> {
-    private final IBaseView mView;
+    private final _IBaseView mView;
 
-    protected BaseCallbck(IBaseView view) {
+    protected BaseCallbck(_IBaseView view) {
         this.mView = view;
     }
 

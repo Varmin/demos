@@ -10,7 +10,7 @@ import javax.inject.Inject;
  * Created by HuangYang
  * on 2020-02-28  15：51.
  */
-public abstract class BaseMVPActivity<P extends IBasePresenter, Ac> extends BaseActivity {
+public abstract class _BaseMVPActivity<P extends _IBasePresenter, Act> extends _BaseActivity {
 
     @Inject
     public P mPresenter;
@@ -38,8 +38,8 @@ public abstract class BaseMVPActivity<P extends IBasePresenter, Ac> extends Base
     }
 
 
-    protected abstract void inject(Ac activityComponent);
-    protected abstract Ac getActivityComponent();
+    protected abstract void inject(Act activityComponent);
+    protected abstract Act getActivityComponent();
 
 }
 

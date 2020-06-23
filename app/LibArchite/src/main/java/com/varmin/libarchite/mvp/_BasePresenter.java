@@ -9,7 +9,7 @@ import io.reactivex.functions.Consumer;
  * on 2020-02-28  14：44.
  * 文件描述：
  */
-public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
+public class _BasePresenter<V extends _IBaseView> implements _IBasePresenter<V> {
     protected String TAG = getClass().getSimpleName();
 
     /**
@@ -27,7 +27,7 @@ public class BasePresenter<V extends IBaseView> implements IBasePresenter<V> {
     @Override
     public void attachView(V view) {
         this.mBaseView = view;
-        this.mView = new ViewDynamicProxy<V, BasePresenter>(mBaseView, this).newProxyInstance();
+        this.mView = new ViewDynamicProxy<V, _BasePresenter>(mBaseView, this).newProxyInstance();
         initPresenter();
         initModel();
     }

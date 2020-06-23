@@ -38,10 +38,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    if (IS_APPLICATION.toBoolean()) {
+    if (IS_APPLICATION) {
         implementation project(":modules:ModuleBase")
     }else {
+        implementation project(":modules:modulemain")
         implementation project(":modules:modulelogin")
+        implementation project(":modules:modulechat")
     }
 
 }

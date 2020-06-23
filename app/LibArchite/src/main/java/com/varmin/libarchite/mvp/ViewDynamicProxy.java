@@ -11,7 +11,7 @@ import java.util.Locale;
  * on 2020-03-06  21：08.
  * 文件描述：
  */
-public class ViewDynamicProxy<V extends IBaseView, P extends IBasePresenter> implements InvocationHandler {
+public class ViewDynamicProxy<V extends _IBaseView, P extends _IBasePresenter> implements InvocationHandler {
     private String TAG;
     private P mBasePresenter;
     private V mBaseView;

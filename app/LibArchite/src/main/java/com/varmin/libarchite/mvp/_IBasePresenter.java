@@ -8,7 +8,7 @@ import io.reactivex.functions.Consumer;
  * on 2020-02-29  16：28.
  * 文件描述：
  */
-public interface IBasePresenter<V extends IBaseView> {
+public interface _IBasePresenter<V extends _IBaseView> {
     void attachView(V view);
     void initPresenter();
     void initModel();

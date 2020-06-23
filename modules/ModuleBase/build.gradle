@@ -35,4 +35,7 @@ dependencies {
     api project(":app:LibView")
     api project(":app:LibArchite")
     api project(":app:LibUtils")
+
+    api 'org.greenrobot:eventbus:3.2.0'
+
 }

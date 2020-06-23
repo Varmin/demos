@@ -13,9 +13,9 @@ import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
  * on 2020-03-09  22：25.
  * 文件描述：
  */
-public abstract class BaseActivity extends RxAppCompatActivity implements IBaseView {
-    protected String TAG = "BaseActivity";
-    protected BaseActivity mActivity;
+public abstract class _BaseActivity extends RxAppCompatActivity implements _IBaseView {
+    protected String TAG = "BaseOriginActivity";
+    protected _BaseActivity mActivity;
 
     //----------------------------------生命周期----------------------------------
 
@@ -27,16 +27,16 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
         setContentView(getLayoutId());
 
         _onCreate(savedInstanceState);
-        initData();
-        initView();
 
+        initView();
+        initData();
         lifeMethodLog();
     }
 
     protected abstract int getLayoutId();
     protected void _onCreate(Bundle savedInstanceState) {}
-    protected abstract void initData();
     protected abstract void initView();
+    protected abstract void initData();
 
     @Override
     protected void onStart() {
@@ -103,17 +103,17 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
 
     @Override
     public void showLoading() {
-        Toast.makeText(getContext(), "showLoading", Toast.LENGTH_SHORT).show();
+        showLoading("");
+    }
+
+    @Override
+    public void showLoading(String content) {
+        Toast.makeText(getContext(), content, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void dismissLoading() {
         Toast.makeText(getContext(), "dismissLoading", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onEmpty() {
-        Toast.makeText(getContext(), "Empty", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -126,15 +126,6 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IBaseV
         onError(toast);
     }
 
-    @Override
-    public void dialog(String content) {
-        onError(content);
-    }
-
-    @Override
-    public void dialogCancelc() {
-
-    }
 
     @Override
     public Context getContext() {

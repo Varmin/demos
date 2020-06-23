@@ -9,7 +9,7 @@ import java.util.List;
  * on 2020-03-12  17：01.
  * 文件描述：
  */
-public abstract class BaseMVPMultiActivity<P extends IBasePresenter> extends BaseActivity {
+public abstract class _BaseMVPMultiActivity<P extends _IBasePresenter> extends _BaseActivity {
     private List<P> mPresenterList;
 
     @Override
