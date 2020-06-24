@@ -1,12 +1,11 @@
-package com.varmin.project.base;
+package com.varmin.project;
 
 /**
- * created by HY on 2020/6/22
+ * created by HYY on 2020/6/24
  * description:
  */
-public class Test {
+class Test {
     public void run(){
         System.out.println("this is Test");
     }
-
 }
