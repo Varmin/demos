@@ -4,7 +4,7 @@
 
     <application
         >
-        <activity android:name=".MainLoginActivity">
+        <activity android:name=".MainActivityLogin">
         </activity>
     </application>
 

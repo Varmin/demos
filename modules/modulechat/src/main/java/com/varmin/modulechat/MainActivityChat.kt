@@ -3,7 +3,7 @@ package com.varmin.modulechat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainChatActivity : AppCompatActivity() {
+class MainActivityChat : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
