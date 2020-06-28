@@ -6,7 +6,7 @@ import android.app.Activity;
  * created by HYY on 2020/6/25
  * description:
  */
-class Test {
+class TestJava {
     public void start(Class<? extends Activity> activityClass){
 
     }

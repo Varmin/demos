@@ -15,5 +15,6 @@ class MainActivityModules : BaseActivity() {
     }
     override fun initData() {
         startAndFinish(MainActivityMain::class.java)
+
     }
 }
