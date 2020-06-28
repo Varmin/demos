@@ -1,12 +1,15 @@
-include ':app:LibUtils'
-include ':app:LibArchite'
+
+include ':modules:modulelogin'
 include ':modules:modulechat'
 include ':modules:modulemain'
 include ':modules:ModuleBase'
-include ':project'
-include ':modules:modulelogin'
+include ':modules'
+
+include ':app:LibUtils'
+include ':app:LibArchite'
 include ':app:LibView'
 include ':app:demo'
 include ':app'
-include ':modules'
+
+include ':project'
 rootProject.name = "Demos"

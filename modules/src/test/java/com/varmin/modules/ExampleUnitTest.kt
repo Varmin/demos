@@ -1,4 +1,4 @@
-package com.varmin.demo
+package com.varmin.modules
 
 import org.junit.Test
 

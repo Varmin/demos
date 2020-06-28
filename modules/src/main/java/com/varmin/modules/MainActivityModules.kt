@@ -1,4 +1,4 @@
-package com.varmin.demo
+package com.varmin.modules
 
 import com.varmin.modulebase.BaseActivity
 import com.varmin.modulebase.startAndFinish
