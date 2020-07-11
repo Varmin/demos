@@ -20,6 +20,7 @@ public class VUtils {
      * sp转px
      */
     public static int sp2px(Context context, float spVal){
+
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,spVal,context.getResources().getDisplayMetrics());
     }
 }

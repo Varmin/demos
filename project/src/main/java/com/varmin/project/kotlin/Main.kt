@@ -2,14 +2,21 @@ package com.varmin.project.kotlin
 
 import com.varmin.project.base.IBase
 
-/**
- * created by HY on 2020/6/22
- * description:
- */
 
-class Main {
-    companion object : IBase {
-        override fun run() {}
-        fun compRun() {}
+class Main : IBase {
+    override fun run() {
+
     }
+
+
+/*
+    /*var (nameKotlin, priceKotlin) = KotlinBook("Kotlin实战", 22f)
+    var (nameJava, priceJava) = JavaBook("Kotlin实战", 22f)*/
+
+    data class KotlinBook(var name: String, var price: Float)
+    class JavaBook(var name: String, var price: Float){
+        operator fun component1() = name
+        operator fun component2() = price
+    }*/
 }
+

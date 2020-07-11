@@ -7,7 +7,7 @@ import com.varmin.project.base.IBase
  * description:
  */
 object A:IBase {
+    var TAG = "Kotlin"
     override fun run() {
-        Main.compRun()
     }
 }

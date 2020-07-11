@@ -32,4 +32,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    debugImplementation 'com.iqiyi.lens:lens:1.1.0'
+    releaseImplementation 'com.iqiyi.lens:lens-no-op:1.1.0'
 }
