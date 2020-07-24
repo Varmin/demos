@@ -1,13 +1,9 @@
 package com.varmin.project;
 
 import com.varmin.project.base.IBase;
-import com.varmin.project.kotlin.Main;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
-import kotlin.jvm.functions.Function1;
-import kotlin.jvm.functions.Function14;
-import kotlin.jvm.functions.Function2;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * created by HYY on 2020/6/24
@@ -17,11 +13,29 @@ class Test implements IBase {
 
     @Override
     public void run() {
+
     }
 
-    class B{
-        public void b(){
-            run();
+    /**
+     * 通配符在“泛型声明”处
+     */
+    class B<T extends Test>{
+        private  T t;
+
+        private List<?> list3;
+        private List<? super String> list2;
+        private List<? extends String> list1;
+
+
+        public List<T> create(){
+            t.run();
+            return new ArrayList<>();
+        }
+
+        public <V extends Test> List<V> create2(V v){
+            t.run();
+
+            return new ArrayList<>();
         }
     }
 }
