@@ -11,5 +11,10 @@
         android:layout_centerHorizontal="true"
         android:text="Main!" />
 
+    <ImageView
+        android:id="@+id/ivTest"
+        android:layout_width="100dp"
+        android:layout_height="148dp"
+        />
 
 </RelativeLayout>
