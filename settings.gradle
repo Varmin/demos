@@ -8,7 +8,6 @@ include ':modules'
 include ':app:LibUtils'
 include ':app:LibArchite'
 include ':app:LibView'
-include ':app:demo'
 include ':app'
 
 include ':project'

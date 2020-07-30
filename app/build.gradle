@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+apply from: 'app-config.gradle'
 android {
     compileSdkVersion 29
 
@@ -38,5 +38,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //implementation project(":app:demo")
+    implementation project(":app:LibUtils")
+    implementation project(":app:LibView")
+    implementation project(":app:LibArchite")
+
+
 }

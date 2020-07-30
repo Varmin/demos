@@ -28,6 +28,7 @@ public abstract class _BaseActivity extends RxAppCompatActivity implements _IBas
 
         _onCreate(savedInstanceState);
 
+        initDataViewPrepare();
         initView();
         initData();
         lifeMethodLog();
@@ -35,6 +36,7 @@ public abstract class _BaseActivity extends RxAppCompatActivity implements _IBas
 
     protected abstract int getLayoutId();
     protected void _onCreate(Bundle savedInstanceState) {}
+    protected void initDataViewPrepare() {}
     protected abstract void initView();
     protected abstract void initData();
 
