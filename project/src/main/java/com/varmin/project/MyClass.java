@@ -10,8 +10,8 @@ public class MyClass {
         //System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
         System.out.println("=======================JavaPro start=======================");
         algorithmRun();
-        javaRun();
-        kotlinRun();
+//        javaRun();
+//        kotlinRun();
         System.out.println("=======================JavaPro over=======================");
     }
 

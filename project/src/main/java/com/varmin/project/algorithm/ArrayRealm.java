@@ -1,8 +1,10 @@
 package com.varmin.project.algorithm;
 
 import com.varmin.project.base.IBase;
+
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * created by HYY on 2020/7/8
@@ -18,22 +20,67 @@ public class ArrayRealm implements IBase {
         removeDuplicatesBetter(array2);
 
         //只出现一次的数字
-        int[] array3 = {1,1,2,4,3,4,2,5,5};
+        int[] array3 = {1, 1, 2, 4, 3, 4, 2, 5, 5};
         singleNumber(array3);
 
         //两个数组的交集 II
-        int[] array4 = {2,4,5,8,9,10};
-        int[] array5 = {1,3,5,7,9};
+        int[] array4 = {2, 4, 5, 8, 9, 10};
+        int[] array5 = {1, 3, 5, 7, 9};
         intersect(array4, array5);
 
         //两数之和
-        int[] array6 = {1,2,3,4,5,6,7,8,9};
+        int[] array6 = {1, 2, 3, 5, 7, 8, 9};
+        twoSum(array6, 12);
+        twoSumHash(array6,12);
     }
 
+    //--------------------------两数之和--------------------------
+    /**
+     * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+     * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+     *
+     * 思路：
+     * 1、遍历nums，计算元素得到target需要的值，再在nums中查找该值（查找时排除元素自己）, O(n2)
+     * 2. 一边遍历nums一边查找已经遍历过的hashmap中的值（target - 元素）， O(n)
+     */
+
+    /**
+     * @param nums   给定数组
+     * @param target 目标值
+     */
+    private int[] twoSum(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            int t = target - nums[i];
+            for (int i1 = 0; i1 < nums.length; i1++) {
+                if (i != i1 && t == nums[i1]) {
+                    System.out.println("ArrayRealm.twoSum, target="+target+"值："+ nums[i]+", "+nums[i1]);
+                    return new int[]{i, i1};
+                }
+            }
+        }
+        return new int[]{};
+    }
+
+    private int[] twoSumHash(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int t = target - nums[i];
+            if (map.containsKey(t)) {
+                if(map.get(t) != i){
+                    System.out.println("ArrayRealm.twoSumHash，target = "+target+", 值："+ nums[i]+", " + nums[map.get(t)]);
+                    return new int[]{i, map.get(t)};
+                }
+            }else {
+                map.put(nums[i], i);
+            }
+        }
+        return new int[]{};
+    }
     //--------------------------两个数组的交集--------------------------
+
     /**
      * 1. 遍历最小数组放入map中，记录出现次数
-     *      遍历最小数组：为了降低空间复杂度
+     * 遍历最小数组：为了降低空间复杂度
      * 2. 遍历最长数组找相交数字，并更新map中记录次数
      */
     private int[] intersect(int[] arr1, int[] arr2) {
@@ -56,13 +103,13 @@ public class ArrayRealm implements IBase {
                 count--;
                 if (count > 0) {
                     map.put(num, count);
-                }else {
+                } else {
                     map.remove(num);
                 }
             }
         }
         int[] result = Arrays.copyOfRange(intersect, 0, curIndex);
-        System.out.println("ArrayRealm.intersect: "+Arrays.toString(result));
+        System.out.println("ArrayRealm.intersect: " + Arrays.toString(result));
         return result;
     }
 
@@ -72,11 +119,12 @@ public class ArrayRealm implements IBase {
         for (int num : array3) {
             single ^= num;
         }
-        System.out.println("ArrayRealm.singleNumber: "+single+", "+Arrays.toString(array3));
+        System.out.println("ArrayRealm.singleNumber: " + single + ", " + Arrays.toString(array3));
         return single;
     }
 
     //--------------------------删除排序数组中的重复项--------------------------
+
     /**
      * 删除排序数组中的重复项
      * FM：有序、相邻重复、快慢双指针
