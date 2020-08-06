@@ -2,6 +2,7 @@ package com.varmin.project;
 
 
 import com.varmin.project.algorithm.ArrayRealm;
+import com.varmin.project.algorithm.CharRealm;
 import com.varmin.project.java.reflectAnnotation.MainReflect;
 import com.varmin.project.kotlin.MainKotlin;
 
@@ -29,7 +30,8 @@ public class MyClass {
 
     private static void algorithmRun() {
         System.out.println("=================Algorithm==================");
-        new ArrayRealm().run();
+        //new ArrayRealm().run();
+        new CharRealm().run();
     }
 
 }
