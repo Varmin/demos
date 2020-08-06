@@ -1,6 +1,5 @@
 package com.varmin.demos
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -9,7 +8,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startActivity(Intent(this, WebViewActivity::class.java))
-        finish()
     }
 }

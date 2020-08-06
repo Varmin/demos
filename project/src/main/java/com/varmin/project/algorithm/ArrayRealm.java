@@ -31,12 +31,52 @@ public class ArrayRealm implements IBase {
         //两数之和
         int[] array6 = {1, 2, 3, 5, 7, 8, 9};
         twoSum(array6, 12);
-        twoSumHash(array6,12);
+        twoSumHash(array6, 12);
+
+        //旋转数组
+        int[] arrRotate = {1,2,3,4,5,6,7};
+        rotate(arrRotate, 3);
+    }
+
+    //--------------------------旋转数组--------------------------
+
+    /**
+     * 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数
+     *             1234567
+     * 向右旋转1步： 7123456
+     * 向右旋转2步： 6712345
+     * 向右旋转3步： 5671234
+     * 向右旋转4步： 4567123
+     * 向右旋转5步： 3456712
+     * 向右旋转6步： 2345671
+     * 向右旋转7步： 1234567
+     *
+     * 1. 每移动一步，所有的都要动；每length步恢复原数组
+     * 2. 移动k步：前（l-k）放到后（l-k）个位置，后k个元素放到前k个位置；（创建一个新数组，把这些有规律的位置替换即可）
+     * 3. 要求，原地算法：
+     *      1. 7654321 (全部反转)
+     *      2. 5671234 (右移3位： 前三位反转，后4位反转：)
+     */
+    private void rotate(int[] nubs, int k) {
+        k %= nubs.length;
+        reverse(nubs, 0, nubs.length-1);
+        reverse(nubs, 0, k - 1);
+        reverse(nubs, k, nubs.length-1);
+    }
+    private void reverse(int[] nubs, int start, int end){
+        while (start < end){
+            int tmp = nubs[start];
+            nubs[start] = nubs[end];
+            nubs[end] = tmp;
+            start ++;
+            end --;
+        }
+        System.out.println("ArrayRealm.reverse: "+ Arrays.toString(nubs));
     }
 
     //--------------------------两数之和--------------------------
     /**
-     * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+     * 给定一个整数数组 nubs 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
      * 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
      *
      * 思路：
@@ -45,15 +85,15 @@ public class ArrayRealm implements IBase {
      */
 
     /**
-     * @param nums   给定数组
+     * @param nubs   给定数组
      * @param target 目标值
      */
-    private int[] twoSum(int[] nums, int target) {
-        for (int i = 0; i < nums.length; i++) {
-            int t = target - nums[i];
-            for (int i1 = 0; i1 < nums.length; i1++) {
-                if (i != i1 && t == nums[i1]) {
-                    System.out.println("ArrayRealm.twoSum, target="+target+"值："+ nums[i]+", "+nums[i1]);
+    private int[] twoSum(int[] nubs, int target) {
+        for (int i = 0; i < nubs.length; i++) {
+            int t = target - nubs[i];
+            for (int i1 = 0; i1 < nubs.length; i1++) {
+                if (i != i1 && t == nubs[i1]) {
+                    System.out.println("ArrayRealm.twoSum, target=" + target + "值：" + nubs[i] + ", " + nubs[i1]);
                     return new int[]{i, i1};
                 }
             }
@@ -66,11 +106,11 @@ public class ArrayRealm implements IBase {
         for (int i = 0; i < nums.length; i++) {
             int t = target - nums[i];
             if (map.containsKey(t)) {
-                if(map.get(t) != i){
-                    System.out.println("ArrayRealm.twoSumHash，target = "+target+", 值："+ nums[i]+", " + nums[map.get(t)]);
+                if (map.get(t) != i) {
+                    System.out.println("ArrayRealm.twoSumHash，target = " + target + ", 值：" + nums[i] + ", " + nums[map.get(t)]);
                     return new int[]{i, map.get(t)};
                 }
-            }else {
+            } else {
                 map.put(nums[i], i);
             }
         }
