@@ -3,35 +3,39 @@ package com.varmin.project;
 
 import com.varmin.project.algorithm.ArrayRealm;
 import com.varmin.project.algorithm.CharRealm;
+import com.varmin.project.algorithm.NodeRealm;
 import com.varmin.project.java.reflectAnnotation.MainReflect;
+import com.varmin.project.java.reflectAnnotation.MainReflectKotlin;
 import com.varmin.project.kotlin.MainKotlin;
 
 public class MyClass {
     public static void main(String[] args) {
         //System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
-        System.out.println("=======================JavaPro start=======================");
+        System.out.println("**********************************************JavaPro start**********************************************");
         algorithmRun();
-//        javaRun();
-//        kotlinRun();
-        System.out.println("=======================JavaPro over=======================");
+        javaRun();
+        kotlinRun();
+        System.out.println("**********************************************JavaPro over**********************************************");
     }
 
 
 
     private static void kotlinRun() {
         System.out.println("=================Kotlin==================");
-        new MainKotlin().run();
+//        new MainKotlin().run();
+//        new MainReflectKotlin().run();
     }
 
     private static void javaRun() {
         System.out.println("=================Java==================");
-        new MainReflect().run();
+        //new MainReflect().run();
     }
 
     private static void algorithmRun() {
         System.out.println("=================Algorithm==================");
         //new ArrayRealm().run();
-        new CharRealm().run();
+//        new CharRealm().run();
+        new NodeRealm().run();
     }
 
 }

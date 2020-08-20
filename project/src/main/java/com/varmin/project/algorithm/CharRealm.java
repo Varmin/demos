@@ -24,6 +24,7 @@ public class CharRealm extends BaseImpl {
         firstSingleChar(str);
     }
 
+    //--------------------------字符串中第一个唯一字符--------------------------
     private int firstSingleChar(String str) {
         HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < str.length(); i++) {
