@@ -13,7 +13,7 @@ android {
         if (IS_APPLICATION) {
             applicationId "com.varmin.modulelogin"
         }
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"

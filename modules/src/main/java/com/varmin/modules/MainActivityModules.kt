@@ -1,7 +1,7 @@
 package com.varmin.modules
 
 import com.varmin.modulebase.BaseActivity
-import com.varmin.modulebase.startAndFinish
+import com.varmin.libutils.startAndFinish
 import com.varmin.modulemain.MainActivityMain
 
 /**

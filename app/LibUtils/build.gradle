@@ -6,7 +6,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -32,6 +32,32 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    // 调试、监控
     debugImplementation 'com.iqiyi.lens:lens:1.1.0'
     releaseImplementation 'com.iqiyi.lens:lens-no-op:1.1.0'
+
+    // 加水印
+    api 'com.huangyz0918:androidwm-light:0.1.2'
+
+    //基础工具库
+    api 'com.github.tamsiree.RxTool:RxKit:2.6.2'
+    //UI库
+    api 'com.github.tamsiree.RxTool:RxUI:2.6.2'
+    //相机库
+    api 'com.github.tamsiree.RxTool:RxCamera:2.6.2'
+    //功能库（Zxing扫描与生成二维码条形码）
+    api 'com.github.tamsiree.RxTool:RxFeature:2.6.2'
+    //ArcGis For Android工具库（API：100.1以上版本）
+    api 'com.github.tamsiree.RxTool:RxArcGisKit:2.6.2'
+    //支付模块(支付宝 微信)[暂为待优化模块，谨慎]
+    api 'com.github.tamsiree.RxTool:RxPay:2.6.2'
+
+    //Glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // 权限
+    api 'pub.devrel:easypermissions:3.0.0'
+
+
 }

@@ -2,7 +2,7 @@ package com.varmin.demos
 
 import com.varmin.libarchite.mvp._BaseActivity
 
-class BaseActivity: _BaseActivity() {
+open class BaseActivity: _BaseActivity() {
     override fun initData() {
         TODO("Not yet implemented")
     }

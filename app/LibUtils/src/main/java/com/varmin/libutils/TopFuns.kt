@@ -1,4 +1,4 @@
-package com.varmin.modulebase
+package com.varmin.libutils
 
 import android.app.Activity
 import android.content.Intent
