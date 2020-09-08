@@ -2,7 +2,9 @@ package com.varmin.project.algorithm;
 
 import com.varmin.project.base.BaseImpl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -91,8 +93,60 @@ public class NodeRealm extends BaseImpl {
         }*/
         hasCycleOfHashCode(ln);
         hasCycleOfRun(ln);
+
+        //回文链表：https://leetcode-cn.com/problems/palindrome-linked-list/solution/
+        isPalindrome(nodeCreator(1,2,3,4,5,4,3,2,1));
+        isPalindromeReverse(nodeCreator(1,2,3,4,5,4,3,2,1));
     }
 
+    /**
+     ****************************回文链表****************************
+     */
+
+    /**
+     * 链表中间位置，后半段列表反转；双指针对比
+     * 对比完成后，再反转回来
+     */
+    private void isPalindromeReverse(ListNode header) {
+        ListNode slow = header;
+        ListNode fast = header;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode newSlow = reverseList2(slow.next);
+        System.out.println("NodeRealm.isPalindromeReverse："+newSlow);
+        System.out.println("NodeRealm.isPalindromeReverse："+header);
+    }
+
+    /**
+     * 链表值存入列表/数组，从前后/中间对比
+     * 空间O(n), 时间O(n)
+     */
+    private boolean isPalindrome(ListNode header) {
+        List<Integer> list = new ArrayList<>();
+        while (header != null) {
+            list.add(header.val);
+            header = header.next;
+        }
+        int start = 0;
+        int end = list.size() -1;
+        while (start < end){
+            if(!list.get(start).equals(list.get(end))){
+                System.out.println("NodeRealm.isPalindrome: false");
+                return false;
+            }
+            start++;
+            end --;
+        }
+        System.out.println("NodeRealm.isPalindrome: true");
+        return true;
+    }
+
+
+    /**
+     ****************************判断环形链表****************************
+     */
     private boolean hasCycleOfRun(ListNode head) {
         if (head == null || head.next == null) return false;
         ListNode slow = head;
