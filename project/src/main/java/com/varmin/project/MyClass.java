@@ -1,13 +1,10 @@
 package com.varmin.project;
 
 
-import com.varmin.project.algorithm.ArrayRealm;
-import com.varmin.project.algorithm.CharRealm;
-import com.varmin.project.algorithm.NodeRealm;
-import com.varmin.project.algorithm.TreeNode;
-import com.varmin.project.java.reflectAnnotation.MainReflect;
-import com.varmin.project.java.reflectAnnotation.MainReflectKotlin;
-import com.varmin.project.kotlin.MainKotlin;
+import com.varmin.project.algorithm.TreeRealm;
+import com.varmin.project.java.generic.GenericMain;
+
+import sun.misc.LRUCache;
 
 public class MyClass {
     public static void main(String[] args) {
@@ -30,6 +27,7 @@ public class MyClass {
     private static void javaRun() {
         System.out.println("=================Java==================");
         //new MainReflect().run();
+        new GenericMain().run();
     }
 
     private static void algorithmRun() {
@@ -37,7 +35,13 @@ public class MyClass {
         //new ArrayRealm().run();
 //        new CharRealm().run();
 //        new NodeRealm().run();
-        new TreeNode().run();
+        new TreeRealm().run();
+
+        test();
+    }
+
+    private static void test() {
+
     }
 
 }

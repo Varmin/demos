@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/gray"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="祖国的花朵："
+        android:textColor="@color/blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <com.varmin.demos.others.expandable.FoldTextView
+        android:id="@+id/ftv"
+        android:layout_width="0dp"
+        app:layout_constraintVertical_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        app:showMaxLine="4"
+        app:showTipAfterExpand="true"
+        app:tipClickable="true"
+        app:tipColor="@color/colorPrimary"
+        app:tipGravity="0"
+        app:layout_constraintLeft_toRightOf="@id/tvName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvName"
+        tools:text="离开家了就了绿卡离开家了就了绿卡就是的立法拉萨的离开家了就了绿卡就是的立法拉萨的离开家了就了绿卡就是的立法拉萨的会计法律爱丽丝的开发laksdflakdlkjl离开家了就了绿卡就是的立法拉萨的会计法律爱丽丝的开发就是的立法拉萨的会计法律爱丽丝的开发"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/ftv"-->
+<!--        android:layout_width="0dp"-->
+<!--        app:layout_constraintVertical_weight="1"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textColor="#000"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/tvName"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/tvName"-->
+<!--        tools:text="离开家了就了绿卡离开家了就了绿卡就是的立法拉萨的离开家了就了绿卡就是的立法拉萨的离开家了就了绿卡就是的立法拉萨的会计法律爱丽丝的开发laksdflakdlkjl离开家了就了绿卡就是的立法拉萨的会计法律爱丽丝的开发就是的立法拉萨的会计法律爱丽丝的开发"-->
+<!--        />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
