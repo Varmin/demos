@@ -40,29 +40,9 @@ public class MyClass {
 //        new NodeRealm().run();
         new TreeRealm().run();
 
-        test();
+        System.out.println("MyClass.algorithmRun: "+ GameHelper.INSTANCE.getMLatestList());
+        GameHelper.INSTANCE.test();
     }
 
-    private static void test() {
-        // todo Set
-        HashSet<String> set = new HashSet<String>();
-
-
-        List<String> list = new ArrayList();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-
-        for (int i = 3; i < 10; i++) {
-            if(list.contains(String.valueOf(i))){
-                boolean tmp = list.remove(String.valueOf(i));
-                if(tmp) list.add(0, String.valueOf(i));
-            }else {
-                list.add(String.valueOf(i));
-            }
-        }
-
-        System.out.println("MyClass.test"+ Arrays.toString(list.toArray()));
-    }
 
 }
