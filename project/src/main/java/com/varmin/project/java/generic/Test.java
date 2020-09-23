@@ -31,11 +31,11 @@ public class Test<T> {
      .newInstance();
      */
     public void printType(){
-        TypeVariable<? extends Class<? extends Test>>[] type = getClass().getTypeParameters();
+        /*TypeVariable<? extends Class<? extends Test>>[] type = getClass().getTypeParameters();
         System.out.println("Test.printType: type = "+ Arrays.toString(type));
 
         ParameterizedType gType = (ParameterizedType) getClass().getGenericSuperclass();
         Type[] gtypes = gType.getActualTypeArguments();
-        System.out.println("Test.printType: gtype = " + Arrays.toString(gtypes));
+        System.out.println("Test.printType: gtype = " + Arrays.toString(gtypes));*/
     }
 }
