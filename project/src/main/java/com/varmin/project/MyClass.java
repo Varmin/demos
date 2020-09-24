@@ -41,7 +41,12 @@ public class MyClass {
         new TreeRealm().run();
 
         System.out.println("MyClass.algorithmRun: "+ GameHelper.INSTANCE.getMLatestList());
-        GameHelper.INSTANCE.test();
+        GameHelper.INSTANCE.put("1");
+        GameHelper.INSTANCE.put("2");
+        GameHelper.INSTANCE.put("3");
+        GameHelper.INSTANCE.put("2");
+        GameHelper.INSTANCE.put("0");
+        System.out.println("MyClass.algorithmRun: "+ GameHelper.INSTANCE.getMLatestList());
     }
 
 
