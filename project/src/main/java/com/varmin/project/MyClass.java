@@ -3,9 +3,13 @@ package com.varmin.project;
 
 import com.varmin.project.algorithm.TreeRealm;
 import com.varmin.project.java.generic.GenericMain;
+import com.varmin.project.kotlin.MainKotlin;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -23,7 +27,7 @@ public class MyClass {
 
     private static void kotlinRun() {
         System.out.println("=================Kotlin==================");
-//        new MainKotlin().run();
+        new MainKotlin().run();
 //        new MainReflectKotlin().run();
     }
 
@@ -40,14 +44,5 @@ public class MyClass {
 //        new NodeRealm().run();
         new TreeRealm().run();
 
-        System.out.println("MyClass.algorithmRun: "+ GameHelper.INSTANCE.getMLatestList());
-        GameHelper.INSTANCE.put("1");
-        GameHelper.INSTANCE.put("2");
-        GameHelper.INSTANCE.put("3");
-        GameHelper.INSTANCE.put("2");
-        GameHelper.INSTANCE.put("0");
-        System.out.println("MyClass.algorithmRun: "+ GameHelper.INSTANCE.getMLatestList());
     }
-
-
 }
