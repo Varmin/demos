@@ -39,14 +39,14 @@ class MainActivity : AppCompatActivity() {
             adapter = ImageAdapter(arrayOf("1", "2", "3").asList())
         }*/
 
-        banner.indicator = CircleIndicator(this@MainActivity)
-        banner.setIndicatorNormalColor(Color.BLUE)
-        banner.setIndicatorSelectedColor(Color.RED)
-        banner.setIndicatorNormalWidth(10)
-        banner.setIndicatorSelectedWidth(30)
-        banner.isAutoLoop(true)
-
-        banner.adapter = ImageAdapter(arrayOf("1", "2", "3").asList())
+//        banner.indicator = CircleIndicator(this@MainActivity)
+//        banner.setIndicatorNormalColor(Color.BLUE)
+//        banner.setIndicatorSelectedColor(Color.RED)
+//        banner.setIndicatorNormalWidth(10)
+//        banner.setIndicatorSelectedWidth(30)
+//        banner.isAutoLoop(true)
+//
+//        banner.adapter = ImageAdapter(arrayOf("1", "2", "3").asList())
     }
 
     inner class ImageAdapter(data: List<String>): BannerAdapter<String, ImageAdapter.ViewHolder>(data){
