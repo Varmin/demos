@@ -7,7 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".others.expandable.ExpandableActivity">
-
+    <Button
+        android:id="@+id/btnInit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="init"/>
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
