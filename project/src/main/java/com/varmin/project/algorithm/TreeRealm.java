@@ -98,15 +98,15 @@ public class TreeRealm extends BaseImpl {
             tree.add(i);
         }
 
-        printLine("遍历");
         /**
          * 深度优先遍历：DFS，Depth First Search
          * 先序、中序、后序遍历
          */
+        printLine("树的遍历");
         //先序
         orderList_1 = new ArrayList();
         preOrder(tree.root, -1);
-        System.out.println("TreeRealm.run，  先序: "+ orderList_1);
+        System.out.println("TreeRealm.run，      先序: "+ orderList_1);
         preOrder_1(tree.root);
         //中序
         orderList_1.clear();
@@ -120,28 +120,29 @@ public class TreeRealm extends BaseImpl {
         System.out.println("TreeRealm.run，      后序: "+ orderList_1);
         preOrder1(tree.root);
 
-        printLine("深度");
         /**
          * 最大深度
          */
+        printLine("深度");
         int maxDep = maxDepth(tree.root);
         System.out.println("TreeRealm.run maxDep = " + maxDep);
 
-        printLine("判断搜索二叉树");
         /**
          * 判断搜索二叉树
          */
+        printLine("判断搜索二叉树");
         Tree treeBst = new Tree();
         treeBst.add(5);
         treeBst.add(3);
         treeBst.add(7);
         treeBst.add(2);
-        treeBst.add(9);//4、9
+        treeBst.add(4);//4(true)、9(false)
         treeBst.add(6);
         treeBst.add(8);
-        System.out.println("TreeRealm.run, ====isBST====: "+ isBST(treeBst.root, null, null));
         preOrder0(treeBst.root);
+        System.out.println("TreeRealm.run, ====isBST====: "+ isBST(treeBst.root, null, null));
         System.out.println("TreeRealm.run, ====isBST2====: "+ isBST2(treeBst.root));
+
     }
 
 
@@ -170,7 +171,7 @@ public class TreeRealm extends BaseImpl {
      */
     private boolean isBST(Node root, Integer mix, Integer max) {
         if (root == null){
-            System.out.println("TreeRealm.isBST_1: "+mix+"-"+ "null" +"-"+max+" --> false");
+            //System.out.println("TreeRealm.isBST_1: "+mix+"-"+ "null" +"-"+max+" --> false");
             return true;
         }
         int value = root.value;
@@ -182,19 +183,19 @@ public class TreeRealm extends BaseImpl {
         // 左子树小于根节点value，
         // 右子树大于根节点value（其需要的根节点的根节点max，在判断左子树时已经传递）
         if (!isBST(root.lChild, mix, value)){
-            System.out.println("TreeRealm.isBST_4: "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> false");
+            //System.out.println("TreeRealm.isBST_4: "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> false");
             return false;
         }else {
-            System.out.println("TreeRealm.isBST_5:==== "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> true");
+            //System.out.println("TreeRealm.isBST_5:==== "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> true");
         }
 
         if (!isBST(root.rChild, value, max)) {
-            System.out.println("TreeRealm.isBST_6: "+mix+"-"+(root.rChild != null ? root.rChild.value : "null")+"-"+value+": rChild --> false");
+            //System.out.println("TreeRealm.isBST_6: "+mix+"-"+(root.rChild != null ? root.rChild.value : "null")+"-"+value+": rChild --> false");
             return false;
         }else {
-            System.out.println("TreeRealm.isBST_7:==== "+mix+"-"+(root.rChild != null ? root.rChild.value : "null")+"-"+value+": rChild --> true");
+            //System.out.println("TreeRealm.isBST_7:==== "+mix+"-"+(root.rChild != null ? root.rChild.value : "null")+"-"+value+": rChild --> true");
         }
-        System.out.println("TreeRealm.isBST_@@@@: "+mix+"-"+value+"-"+max+" --> true");
+        //System.out.println("TreeRealm.isBST_@@@@: "+mix+"-"+value+"-"+max+" --> true");
         return true;
     }
 
@@ -203,7 +204,7 @@ public class TreeRealm extends BaseImpl {
      */
     private boolean isBST2(Node root) {
         if(root == null) return true;
-        int lastValue = Integer.MIN_VALUE;
+        long lastValue = Long.MIN_VALUE;
         Stack<Node> stack = new Stack();
         while (!stack.isEmpty() || root != null) {
             if (root != null) {
@@ -255,10 +256,10 @@ public class TreeRealm extends BaseImpl {
                 if (tmp.rChild != null) stack.push(tmp.rChild);
                 if (tmp.lChild != null) stack.push(tmp.lChild);
 
-                System.out.println("TreeRealm.preOrder_1: add: "+ tmp.value);
+                //System.out.println("TreeRealm.preOrder_1: add: "+ tmp.value);
                 str.append(tmp.value).append(", ");
             }
-            System.out.println("TreeRealm.preOrder_1: "+ str.toString());
+            System.out.println("TreeRealm.preOrder_1 先序: "+ str.toString());
         }
     }
 
@@ -277,11 +278,11 @@ public class TreeRealm extends BaseImpl {
             while (!stack.isEmpty() || node != null){
                 if (node != null) {
                     stack.add(node);
-                    System.out.println("TreeRealm.preOrder0: add: "+ node.value);
+                    //System.out.println("TreeRealm.preOrder0: add: "+ node.value);
                     node = node.lChild;
                 }else {
                     Node tmp = stack.pop();
-                    System.out.println("TreeRealm.preOrder0: ------pop: "+ tmp.value);
+                    //System.out.println("TreeRealm.preOrder0: ------pop: "+ tmp.value);
                     str.append(tmp.value).append(", ");
                     node = tmp.rChild;
                 }
@@ -290,15 +291,33 @@ public class TreeRealm extends BaseImpl {
         System.out.println("TreeRealm.preOrder0, 中序："+ str.toString());
     }
 
-    //非递归，后序
+    /**
+     * 非递归，后序: 左右中
+     */
     private void preOrder1(Node node) {
-        if(node != null){
+        if (node != null) {
+            Stack<Node> stackTmp = new Stack<Node>();
             Stack<Node> stack = new Stack<Node>();
             stack.push(node);
-            while (!stack.isEmpty()){
+            while (!stack.isEmpty()) {
                 Node tmp = stack.pop();
-
+                /**
+                 * 先序：中左右，添加到stack时先添加r子树再l子树，先入后出就遍历为中左右
+                 * 此处stack添加 中左右（先序为中右左），遍历时：中右左
+                 * 添加到stackTmp：中右左，出栈顺序：左右中
+                 */
+                //注意这里和先序的l/r添加顺序
+                if(tmp.lChild != null) stack.push(tmp.lChild);
+                if(tmp.rChild != null) stack.push(tmp.rChild);
+                //System.out.println("TreeRealm.preOrder1 push stack: "+ tmp.value);
+                stackTmp.push(tmp);
             }
+
+            StringBuilder strBuilder = new StringBuilder();
+            while (!stackTmp.isEmpty()) {
+                strBuilder.append(stackTmp.pop().value).append(", ");
+            }
+            System.out.println("TreeRealm.preOrder1  后序："+ strBuilder.toString());
         }
     }
 

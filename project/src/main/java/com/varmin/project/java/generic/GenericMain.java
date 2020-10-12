@@ -2,7 +2,10 @@ package com.varmin.project.java.generic;
 
 import com.varmin.project.base.BaseImpl;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -22,7 +25,6 @@ public class GenericMain extends BaseImpl {
            |--Beef
                |--RedBeef
     */
-    public interface IWater{}
     public class Food {
         public void taste(){
             System.out.println("taste: "+getClass().getSimpleName());
@@ -40,11 +42,29 @@ public class GenericMain extends BaseImpl {
     public class Beef extends Meat {}
     public class RedBeef extends Beef {}
 
+//--------------------------多个边界--------------------------
+    public interface IWater{
+        void drink();
+    }
+    public interface ISmell{
+        void smell();
+    }
+
+    //只能一个类，可以多个接口
+    public class All<T extends Fruit & IWater & ISmell>{
+        private T t;
+        public void f(){
+            t.taste();
+            t.smell();
+        }
+    }
+
+
+    //--------------------------泛型应用--------------------------
 
     /**
      * class Plate<T extends Fruit & IWater>{}
-     * 类型声明处的extends为“边界”
-     * &：为实现接口
+     * 类型声明处的extends为“边界”、&：为实现接口
      */
     public static class Plate<T extends Fruit>{
         /**
@@ -54,19 +74,21 @@ public class GenericMain extends BaseImpl {
         private List<? extends Fruit> l2;
         private List<? super Apple> l3;
         private T mT;
+
+        //实际上不属于泛型方法，只是引用了泛型类的泛型参数
         public void add(T t){
             this.mT = t;
         }
 
+        //泛型方法
         public <K extends Fruit> void add2(K k){
             k.taste();
         }
 
-        public static  <P extends Food> void add3(P p){
+        //static泛型方法，不能使用类上的泛型参数
+        public static <P extends Food> void add3(P p){
             p.taste();
         }
-
-        //public static void add4(T t){ t.taste(); }
 
         public void filled(){
             System.out.println("Plate.filled: " + mT);
@@ -92,6 +114,22 @@ public class GenericMain extends BaseImpl {
         Test.<Boolean>setValue3(true);
 
         test.printType();
+
+
+        Fruit[] fruits = new Apple[10];
+        //class [Lcom.varmin.project.java.generic.GenericMain$Fruit;, class [Lcom.varmin.project.java.generic.GenericMain$Apple;
+        System.out.println("GenericMain.run: "+ new Fruit[10].getClass() + ", " + new Apple[10].getClass());
+        fruits[0] = new Apple();
+        fruits[0] = new RedApple();
+        // 运行时异常：java.lang.ArrayStoreException
+        //fruits[0] = new Fruit();
+
+        // Compile Error: incompatible types(编译错误：不兼容类型)
+        //List<Fruit> fList = new ArrayList<Apple>();
+
+        //数组是赋值，List是泛型
+        //class java.util.ArrayList, class java.util.ArrayList
+        System.out.println("GenericMain.run: "+ new ArrayList<Fruit>().getClass() + ", "+ new ArrayList<Apple>().getClass());
     }
 
 }
