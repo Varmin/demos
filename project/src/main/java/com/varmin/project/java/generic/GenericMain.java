@@ -126,10 +126,39 @@ public class GenericMain extends BaseImpl {
 
         // Compile Error: incompatible types(编译错误：不兼容类型)
         //List<Fruit> fList = new ArrayList<Apple>();
-
         //数组是赋值，List是泛型
         //class java.util.ArrayList, class java.util.ArrayList
         System.out.println("GenericMain.run: "+ new ArrayList<Fruit>().getClass() + ", "+ new ArrayList<Apple>().getClass());
+
+
+        List<Fruit> fl2 = new ArrayList<>();
+//        fl2 = new ArrayList<Apple>();
+//        fl2 = new ArrayList<Fruit>();
+//        fl2 = new ArrayList<Food>();
+        fl2.add(new Apple());
+        fl2.add(new Fruit());
+        fl2.add(new Food());
+        Fruit f2 = fl2.get(0);
+
+        List<? extends Fruit> fl3 = new ArrayList<>();
+        fl3 = new ArrayList<Apple>();
+        fl3 = new ArrayList<Fruit>();
+        fl3 = new ArrayList<Food>();
+        fl3.add(new Apple());
+        fl3.add(new Fruit());
+        fl3.add(new Food());
+        Fruit f3 = fl3.get(0);
+
+
+        List<? super Fruit> fl4 = new ArrayList<>();
+//        fl4 = new ArrayList<Apple>();
+//        fl4 = new ArrayList<Fruit>();
+//        fl4 = new ArrayList<Food>();
+        fl4.add(new Apple());
+        fl4.add(new Fruit());
+        fl4.add(new Food());
+        Object f4 = fl4.get(0);
+
     }
 
 }
