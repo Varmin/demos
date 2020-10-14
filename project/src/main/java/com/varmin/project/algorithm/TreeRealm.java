@@ -86,6 +86,24 @@ public class TreeRealm extends BaseImpl {
             }
             return this;
         }
+
+        public String print(){
+            Queue<Node> queue = new LinkedList<>();
+            queue.add(root);
+
+            while (!queue.isEmpty()) {
+                Node node = queue.poll();
+
+                if (node.lChild == null) {
+                }else if(node.rChild == null){
+                }else {
+                    queue.add(node.lChild);
+                    queue.add(node.rChild);
+                }
+            }
+
+            return "";
+        }
     }
 
 
@@ -132,17 +150,69 @@ public class TreeRealm extends BaseImpl {
          */
         printLine("判断搜索二叉树");
         Tree treeBst = new Tree();
-        treeBst.add(5);
-        treeBst.add(3);
-        treeBst.add(7);
-        treeBst.add(2);
-        treeBst.add(4);//4(true)、9(false)
-        treeBst.add(6);
-        treeBst.add(8);
+        for (int i : new int[]{5,3,7,2,4,6,8}) {//4(true)、9(false)
+            treeBst.add(i);
+        }
         preOrder0(treeBst.root);
         System.out.println("TreeRealm.run, ====isBST====: "+ isBST(treeBst.root, null, null));
         System.out.println("TreeRealm.run, ====isBST2====: "+ isBST2(treeBst.root));
 
+        /**
+         * 对称二叉树
+         */
+        printLine("对称二叉树");
+        Tree tree2 = new Tree();
+        for (int i : new int[]{1,2,2,3,4,4,3}) {
+            tree2.add(i);
+        }
+        System.out.println("TreeRealm.run result: " + checkBT(tree2.root, tree2.root));
+        System.out.println("TreeRealm.run result: " + checkBT2(tree2.root));
+    }
+
+    /**
+     ****************************判断对称二叉树****************************
+     * 根节点的左右子树互为镜像对称（注意：不是每个子树的左右节点镜像）
+     */
+
+    /**
+     * 递归
+     * 1. 左右节点为null
+     * 2. 左右子树镜像对称
+     */
+    private boolean checkBT(Node p, Node q) {
+        if (p == null && q == null) {
+            System.out.println("TreeRealm.checkBT true null&null");
+            return true;
+        }
+        if (p == null || q == null) {
+            System.out.println("TreeRealm.checkBT false: "+ p + ", " + q);
+            return false;
+        }
+        System.out.println("TreeRealm.checkBT: "+ p.value + ", " + q.value);
+        //满足条件：左右节点相等，且，子树节点镜像对称
+        return p.value == q.value && checkBT(p.lChild, q.rChild) && checkBT(p.rChild, q.lChild);
+    }
+
+    private boolean checkBT2(Node root) {
+        if (root == null) return true;
+        Stack<Node> stack = new Stack();
+        stack.push(root.lChild);
+        stack.push(root.rChild);
+        while (!stack.isEmpty()) {
+            Node p = stack.pop();
+            Node q = stack.pop();
+
+            if (q == null && p == null) continue;
+            if (p == null || q == null) return false;
+            if(p.value != q.value) return false;
+
+            stack.push(p.lChild);
+            stack.push(q.rChild);
+
+            stack.push(p.rChild);
+            stack.push(q.lChild);
+        }
+        return true;
     }
 
 
