@@ -131,7 +131,7 @@ public class GenericMain extends BaseImpl {
         System.out.println("GenericMain.run: "+ new ArrayList<Fruit>().getClass() + ", "+ new ArrayList<Apple>().getClass());
 
 
-        List<Fruit> fl2 = new ArrayList<>();
+        /*List<Fruit> fl2 = new ArrayList<>();
 //        fl2 = new ArrayList<Apple>();
 //        fl2 = new ArrayList<Fruit>();
 //        fl2 = new ArrayList<Food>();
@@ -157,7 +157,7 @@ public class GenericMain extends BaseImpl {
         fl4.add(new Apple());
         fl4.add(new Fruit());
         fl4.add(new Food());
-        Object f4 = fl4.get(0);
+        Object f4 = fl4.get(0);*/
 
     }
 
