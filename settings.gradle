@@ -1,4 +1,4 @@
-
+include ':modules:opensdk'
 include ':modules:modulelogin'
 include ':modules:modulechat'
 include ':modules:modulemain'

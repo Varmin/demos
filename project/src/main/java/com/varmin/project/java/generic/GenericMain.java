@@ -131,7 +131,7 @@ public class GenericMain extends BaseImpl {
         //class java.util.ArrayList, class java.util.ArrayList
         System.out.println("GenericMain.run: "+ new ArrayList<Fruit>().getClass() + ", "+ new ArrayList<Apple>().getClass());
 
-        List<Fruit> fl2 = new ArrayList<>();
+       /* List<Fruit> fl2 = new ArrayList<>();
         fl2 = new ArrayList<RedApple>();// Compile Error: incompatible types
         fl2 = new ArrayList<Apple>();// Compile Error: incompatible types
         fl2 = new ArrayList<Fruit>();
@@ -142,7 +142,7 @@ public class GenericMain extends BaseImpl {
         fl2.add(new Food());// Compile Error: incompatible types
         Fruit f2 = fl2.get(0);
 
-        /**
+        *//**
          * List<? extends Fruit> fl3 = new ArrayList<>();
 
          * fl3 = new ArrayList<RedApple>();
@@ -177,7 +177,7 @@ public class GenericMain extends BaseImpl {
          *      List<? extends Fruit>是需要存入的对象是Fruit的子类
          *      List<? super Fruit>是需要存入的对象是Furit的基类
          *      而是List是哪种类型？
-         */
+         *//*
 
         List<? extends Fruit> fl3 = new ArrayList<>();
         fl3 = new ArrayList<RedApple>();
@@ -210,7 +210,7 @@ public class GenericMain extends BaseImpl {
         fl5.add(new Apple());// Compile Error: incompatible types
         fl5.add(new Fruit());// Compile Error: incompatible types
         fl5.add(new Food());// Compile Error: incompatible types
-        Object f5 = fl5.get(0);
+        Object f5 = fl5.get(0);*/
     }
 
 }

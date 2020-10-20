@@ -1,75 +1,36 @@
 package com.varmin.demos
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.varmin.demos.others.expandable.ExpandableActivity
-import com.varmin.libutils.startAndFinish
-import com.youth.banner.adapter.BannerAdapter
-import com.youth.banner.config.IndicatorConfig
-import com.youth.banner.indicator.CircleIndicator
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        TextView(this).setText(Html.fromHtml(""))
+        var content = "<p>测试发帖</p><br />\n<p>换行<span style='color:#1abc9c'>测试</span></p>\n\n<p>结尾无换行</p>\n"
+        content = "<p>空间和雕刻技法和\n啊啊啊</p>\n\n<p>阿斯顿发射点啊啊</p>\n\n<ol>\n\t<li>啊手动阀手动阀啊</li>\n\t<li>阿斯顿发生啊啊啊</li>\n</ol>\n\n<p>是豆腐干大师傅啊啊啊</p>\n\n<p>地方大师傅似的啊啊啊</p>\n"
+//        content = content.replace("(</p>\n)$".toRegex(), "")
+//        content = content.replace("(<p>)*$".toRegex(), "")
+        var contentReplace = content
+            .replace(">\n\n", ">")
+            .replace(">\n", ">")
+            .replace("<p>", "")
+            .replace("</p>", "<br />")
+            .replace("\n", "<br />")
+            .replace("(<br />)$".toRegex(), "")
+        //Log.d(TAG, "onCreate: $content")
+        Log.d(TAG, "onCreate, contentReplace= $contentReplace")
 
-        startAndFinish(ExpandableActivity::class.java)
+        tvTest.text = Html.fromHtml(contentReplace)
+//        tvTest.text = Html.fromHtml(content, Html.FROM_HTML_MODE_COMPACT)
 
-       /* banner.run {
-            indicator = CircleIndicator(this@MainActivity).apply {
-            }
-//            setIndicatorNormalColorRes(R.color.blue)
-//            setIndicatorSelectedColorRes(R.color.red)
+//        tvTest2.text = Html.fromHtml(contentReplace)
+        tvTest2.text = Html.fromHtml(contentReplace, Html.FROM_HTML_MODE_COMPACT)
 
-            setIndicatorNormalColor(Color.BLUE)
-            setIndicatorSelectedColor(Color.RED)
-
-            setIndicatorHeight(30)
-            setIndicatorWidth(30, 55)
-            setIndicatorRadius(30)
-            isAutoLoop(true)
-
-            adapter = ImageAdapter(arrayOf("1", "2", "3").asList())
-        }*/
-
-        banner.indicator = CircleIndicator(this@MainActivity)
-        banner.setIndicatorNormalColor(Color.BLUE)
-        banner.setIndicatorSelectedColor(Color.RED)
-        banner.setIndicatorNormalWidth(10)
-        banner.setIndicatorSelectedWidth(30)
-        banner.isAutoLoop(true)
-
-        banner.adapter = ImageAdapter(arrayOf("1", "2", "3").asList())
-    }
-
-    inner class ImageAdapter(data: List<String>): BannerAdapter<String, ImageAdapter.ViewHolder>(data){
-        inner class ViewHolder: RecyclerView.ViewHolder{
-            public lateinit var mView: ImageView
-            constructor(view: ImageView):super(view){
-                mView = view
-            }
-        }
-
-        override fun onCreateHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-            return ViewHolder(ImageView(this@MainActivity).apply {
-                layoutParams = ViewGroup.LayoutParams(-1, -1)
-                scaleType = ImageView.ScaleType.CENTER_CROP
-            })
-        }
-
-        override fun onBindView(holder: ViewHolder?, data: String?, position: Int, size: Int) {
-            holder?.mView?.setImageResource(R.drawable.wechat_header)
-        }
     }
 }

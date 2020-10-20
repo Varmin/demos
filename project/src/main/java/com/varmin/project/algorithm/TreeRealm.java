@@ -1,9 +1,10 @@
 package com.varmin.project.algorithm;
 
 import com.varmin.project.base.BaseImpl;
-
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -26,61 +27,61 @@ import java.util.Stack;
 public class TreeRealm extends BaseImpl {
     private ArrayList<Integer> orderList_1;
 
-    class Node{
-        public int value;
-        public Node lChild;
-        public Node rChild;
-        public Node(int value){
-            this.value = value;
+    class TreeNode {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int value){
+            this.val = value;
         }
 
         @Override
         public String toString() {
             return "Node{" +
-                    "value=" + value +
-                    ", left =" + (lChild == null ? 0 : lChild.value) +
-                    ", right =" + (rChild == null ? 0 : rChild.value) +
+                    "value=" + val +
+                    ", left =" + (left == null ? 0 : left.val) +
+                    ", right =" + (right == null ? 0 : right.val) +
                     '}';
         }
     }
 
     class Tree{
-        private Node root;
+        private TreeNode root;
         public Tree(){}
         public Tree(int root){
-            this.root = new Node(root);
+            this.root = new TreeNode(root);
         }
-        public Tree(Node root){
+        public Tree(TreeNode root){
             this.root = root;
         }
 
         // 广度优先遍历寻找空位置添加节点
         public Tree add(int value){
-            Node tmp = new Node(value);
+            TreeNode tmp = new TreeNode(value);
             if(root == null){
                 root = tmp;
-                System.out.println("Tree.add 根节点："+ root.value);
+                System.out.println("Tree.add 根节点："+ root.val);
                 return this;
             }
 
-            Queue<Node> queue = new LinkedList<>();
+            Queue<TreeNode> queue = new LinkedList<>();
             queue.add(root);
 
             while (!queue.isEmpty()) {
-                Node node = queue.poll();
+                TreeNode node = queue.poll();
 
-                if (node.lChild == null) {
-                    node.lChild = tmp;
-                    System.out.println("Tree.add left = " + tmp.value + " --> 根节点：" + node.value);
+                if (node.left == null) {
+                    node.left = tmp;
+                    System.out.println("Tree.add left = " + tmp.val + " --> 根节点：" + node.val);
                     return this;
-                }else if(node.rChild == null){
-                    node.rChild = tmp;
-                    System.out.println("Tree.add right = "+  tmp.value + " --> 根节点：" + node.value);
+                }else if(node.right == null){
+                    node.right = tmp;
+                    System.out.println("Tree.add right = "+  tmp.val + " --> 根节点：" + node.val);
                     return this;
                 }else {
                     // 当前节点已有子节点时，添加其子节点到queue遍历
-                    queue.add(node.lChild);
-                    queue.add(node.rChild);
+                    queue.add(node.left);
+                    queue.add(node.right);
                     System.out.println("Tree.add 遍历左右节点 ---> " + node);
                 }
             }
@@ -88,17 +89,17 @@ public class TreeRealm extends BaseImpl {
         }
 
         public String print(){
-            Queue<Node> queue = new LinkedList<>();
+            Queue<TreeNode> queue = new LinkedList<>();
             queue.add(root);
 
             while (!queue.isEmpty()) {
-                Node node = queue.poll();
+                TreeNode node = queue.poll();
 
-                if (node.lChild == null) {
-                }else if(node.rChild == null){
+                if (node.left == null) {
+                }else if(node.right == null){
                 }else {
-                    queue.add(node.lChild);
-                    queue.add(node.rChild);
+                    queue.add(node.left);
+                    queue.add(node.right);
                 }
             }
 
@@ -167,6 +168,96 @@ public class TreeRealm extends BaseImpl {
         }
         System.out.println("TreeRealm.run result: " + checkBT(tree2.root, tree2.root));
         System.out.println("TreeRealm.run result: " + checkBT2(tree2.root));
+
+        /**
+         * 层序遍历
+         */
+        printLine("层序遍历");
+        Tree tree3 = new Tree();
+        for (int i : new int[]{1,2,3,4,5,6,7}) {
+            tree3.add(i);
+        }
+        //DFS
+        dfs(tree3.root);
+        //BFS
+        bfs(tree3.root);
+        //层序遍历
+        levelOrder(tree3.root);
+
+        /**
+         * 有序数组转为搜索二叉树
+         */
+        printLine("有序数组转为搜索二叉树");
+        int[] nums = new int[]{-10, -3, 0, 5, 9};
+        TreeNode node = sortedArrayToBST(nums, 0, nums.length - 1);
+        preOrder0(node);
+    }
+
+    /**
+     ****************************有序数组转为搜索二叉树****************************
+     *
+     */
+    private TreeNode sortedArrayToBST(int[] nums, int left, int right) {
+        if (left > right) return null;
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        System.out.println("TreeRealm.sortedArrayToBST: "+ left+", "+right +": "+mid+", "+ root.val);
+        root.left = sortedArrayToBST(nums, left, mid -1);
+        root.right = sortedArrayToBST(nums, mid + 1, right);
+        return root;
+    }
+
+    /**
+     ****************************层序遍历****************************
+     */
+    // Deep First Search 深度优先遍历
+    private void dfs(TreeNode root) {
+        if (root == null) return;
+        System.out.println("TreeRealm.dfs: "+ root.val);
+        dfs(root.left);
+        dfs(root.right);
+    }
+
+    // Breath First Search 广度优先遍历
+    private void bfs(TreeNode root) {
+        if(root == null) return;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            System.out.println("TreeRealm.bfs: "+ node.val);
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
+        }
+    }
+
+    private List<List<Integer>> levelOrder(TreeNode root) {
+        if(root == null) return new ArrayList();
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            //正常while循环一个一个出队，导致队列中有多层节点，无法区分每一层节点；使用for循环一次把一层的出完
+            int levelSize = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for (int i = 0; i < levelSize; i++) {
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            res.add(level);
+        }
+
+        // 遍历结果
+        for (List<Integer> level : res) {
+            StringBuilder sb = new StringBuilder();
+            for (Integer integer : level) {
+                sb.append(integer).append(", ");
+            }
+            System.out.println("TreeRealm.levelBFS: " + sb.toString());
+        }
+        return res;
     }
 
     /**
@@ -179,7 +270,7 @@ public class TreeRealm extends BaseImpl {
      * 1. 左右节点为null
      * 2. 左右子树镜像对称
      */
-    private boolean checkBT(Node p, Node q) {
+    private boolean checkBT(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             System.out.println("TreeRealm.checkBT true null&null");
             return true;
@@ -188,29 +279,29 @@ public class TreeRealm extends BaseImpl {
             System.out.println("TreeRealm.checkBT false: "+ p + ", " + q);
             return false;
         }
-        System.out.println("TreeRealm.checkBT: "+ p.value + ", " + q.value);
+        System.out.println("TreeRealm.checkBT: "+ p.val + ", " + q.val);
         //满足条件：左右节点相等，且，子树节点镜像对称
-        return p.value == q.value && checkBT(p.lChild, q.rChild) && checkBT(p.rChild, q.lChild);
+        return p.val == q.val && checkBT(p.left, q.right) && checkBT(p.right, q.left);
     }
 
-    private boolean checkBT2(Node root) {
+    private boolean checkBT2(TreeNode root) {
         if (root == null) return true;
-        Stack<Node> stack = new Stack();
-        stack.push(root.lChild);
-        stack.push(root.rChild);
+        Stack<TreeNode> stack = new Stack();
+        stack.push(root.left);
+        stack.push(root.right);
         while (!stack.isEmpty()) {
-            Node p = stack.pop();
-            Node q = stack.pop();
+            TreeNode p = stack.pop();
+            TreeNode q = stack.pop();
 
             if (q == null && p == null) continue;
             if (p == null || q == null) return false;
-            if(p.value != q.value) return false;
+            if(p.val != q.val) return false;
 
-            stack.push(p.lChild);
-            stack.push(q.rChild);
+            stack.push(p.left);
+            stack.push(q.right);
 
-            stack.push(p.rChild);
-            stack.push(q.lChild);
+            stack.push(p.right);
+            stack.push(q.left);
         }
         return true;
     }
@@ -239,12 +330,12 @@ public class TreeRealm extends BaseImpl {
      *   左子树的根节点为 r值
      *   右子树的根节点为l值，右子树根节点的根节点为r值
      */
-    private boolean isBST(Node root, Integer mix, Integer max) {
+    private boolean isBST(TreeNode root, Integer mix, Integer max) {
         if (root == null){
             //System.out.println("TreeRealm.isBST_1: "+mix+"-"+ "null" +"-"+max+" --> false");
             return true;
         }
-        int value = root.value;
+        int value = root.val;
         //无论是左右子树，满足在区间内部
         if(mix != null && value <= mix){ return false;}
         if(max != null && value >= max){ return false;}
@@ -252,14 +343,14 @@ public class TreeRealm extends BaseImpl {
         // 递归传入合适的区间：
         // 左子树小于根节点value，
         // 右子树大于根节点value（其需要的根节点的根节点max，在判断左子树时已经传递）
-        if (!isBST(root.lChild, mix, value)){
+        if (!isBST(root.left, mix, value)){
             //System.out.println("TreeRealm.isBST_4: "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> false");
             return false;
         }else {
             //System.out.println("TreeRealm.isBST_5:==== "+mix+"-"+(root.lChild != null ? root.lChild.value : "null")+"-"+value+": lChild --> true");
         }
 
-        if (!isBST(root.rChild, value, max)) {
+        if (!isBST(root.right, value, max)) {
             //System.out.println("TreeRealm.isBST_6: "+mix+"-"+(root.rChild != null ? root.rChild.value : "null")+"-"+value+": rChild --> false");
             return false;
         }else {
@@ -272,20 +363,20 @@ public class TreeRealm extends BaseImpl {
     /**
      * 中序遍历正好符合二叉搜索树的排序规则，对比当前和上一个节点的值
      */
-    private boolean isBST2(Node root) {
+    private boolean isBST2(TreeNode root) {
         if(root == null) return true;
         long lastValue = Long.MIN_VALUE;
-        Stack<Node> stack = new Stack();
+        Stack<TreeNode> stack = new Stack();
         while (!stack.isEmpty() || root != null) {
             if (root != null) {
                 stack.push(root);
-                root = root.lChild;
+                root = root.left;
             } else {
-                Node tmp = stack.pop();
-                root = tmp.rChild;
+                TreeNode tmp = stack.pop();
+                root = tmp.right;
 
-                if (tmp.value < lastValue) return false;
-                lastValue = tmp.value;
+                if (tmp.val < lastValue) return false;
+                lastValue = tmp.val;
             }
         }
         return true;
@@ -300,14 +391,14 @@ public class TreeRealm extends BaseImpl {
      * lChild、rChild既是子节点，又是父节点，不用考虑子/父节点，只考虑顺序
      */
     //递归
-    private void preOrder(Node node, int order) {
+    private void preOrder(TreeNode node, int order) {
         if (node == null) return;
 
-        if(order == -1) orderList_1.add(node.value);
-        preOrder(node.lChild, order);
-        if(order == 0) orderList_1.add(node.value);
-        preOrder(node.rChild, order);
-        if(order == 1) orderList_1.add(node.value);
+        if(order == -1) orderList_1.add(node.val);
+        preOrder(node.left, order);
+        if(order == 0) orderList_1.add(node.val);
+        preOrder(node.right, order);
+        if(order == 1) orderList_1.add(node.val);
     }
 
     /**
@@ -315,19 +406,19 @@ public class TreeRealm extends BaseImpl {
      * 无论是左右子树节点，都可能是其它子树的根节点，每次循环都入栈左右节点
      * 栈：先入后出，先入右再入左，下次循环先出左子树（中左右）
      */
-    private void preOrder_1(Node node) {
+    private void preOrder_1(TreeNode node) {
         StringBuilder str = new StringBuilder();
         if(node != null){
-            Stack<Node> stack = new Stack<>();
+            Stack<TreeNode> stack = new Stack<>();
             stack.push(node);
             while (!stack.isEmpty()){
-                Node tmp = stack.pop();
+                TreeNode tmp = stack.pop();
                 //栈：先进后出，先入栈右节点再左节点，下次取出的就是左节点了
-                if (tmp.rChild != null) stack.push(tmp.rChild);
-                if (tmp.lChild != null) stack.push(tmp.lChild);
+                if (tmp.right != null) stack.push(tmp.right);
+                if (tmp.left != null) stack.push(tmp.left);
 
                 //System.out.println("TreeRealm.preOrder_1: add: "+ tmp.value);
-                str.append(tmp.value).append(", ");
+                str.append(tmp.val).append(", ");
             }
             System.out.println("TreeRealm.preOrder_1 先序: "+ str.toString());
         }
@@ -340,21 +431,21 @@ public class TreeRealm extends BaseImpl {
      * 中：当左子树走到头时，从栈中取出当前节点
      * 右：从栈中取出根节点往右子树方向走，再进行重复步骤
      */
-    private void preOrder0(Node node) {
+    private void preOrder0(TreeNode node) {
         StringBuilder str = new StringBuilder();
 
         if(node != null){
-            Stack<Node> stack = new Stack<>();
+            Stack<TreeNode> stack = new Stack<>();
             while (!stack.isEmpty() || node != null){
                 if (node != null) {
                     stack.add(node);
                     //System.out.println("TreeRealm.preOrder0: add: "+ node.value);
-                    node = node.lChild;
+                    node = node.left;
                 }else {
-                    Node tmp = stack.pop();
+                    TreeNode tmp = stack.pop();
                     //System.out.println("TreeRealm.preOrder0: ------pop: "+ tmp.value);
-                    str.append(tmp.value).append(", ");
-                    node = tmp.rChild;
+                    str.append(tmp.val).append(", ");
+                    node = tmp.right;
                 }
             }
         }
@@ -364,28 +455,28 @@ public class TreeRealm extends BaseImpl {
     /**
      * 非递归，后序: 左右中
      */
-    private void preOrder1(Node node) {
+    private void preOrder1(TreeNode node) {
         if (node != null) {
-            Stack<Node> stackTmp = new Stack<Node>();
-            Stack<Node> stack = new Stack<Node>();
+            Stack<TreeNode> stackTmp = new Stack<TreeNode>();
+            Stack<TreeNode> stack = new Stack<TreeNode>();
             stack.push(node);
             while (!stack.isEmpty()) {
-                Node tmp = stack.pop();
+                TreeNode tmp = stack.pop();
                 /**
                  * 先序：中左右，添加到stack时先添加r子树再l子树，先入后出就遍历为中左右
                  * 此处stack添加 中左右（先序为中右左），遍历时：中右左
                  * 添加到stackTmp：中右左，出栈顺序：左右中
                  */
                 //注意这里和先序的l/r添加顺序
-                if(tmp.lChild != null) stack.push(tmp.lChild);
-                if(tmp.rChild != null) stack.push(tmp.rChild);
+                if(tmp.left != null) stack.push(tmp.left);
+                if(tmp.right != null) stack.push(tmp.right);
                 //System.out.println("TreeRealm.preOrder1 push stack: "+ tmp.value);
                 stackTmp.push(tmp);
             }
 
             StringBuilder strBuilder = new StringBuilder();
             while (!stackTmp.isEmpty()) {
-                strBuilder.append(stackTmp.pop().value).append(", ");
+                strBuilder.append(stackTmp.pop().val).append(", ");
             }
             System.out.println("TreeRealm.preOrder1  后序："+ strBuilder.toString());
         }
@@ -397,7 +488,7 @@ public class TreeRealm extends BaseImpl {
     /**
      * 最大深度
      */
-    private int maxDepth(Node root) {
-        return root == null ? 0 : Math.max(maxDepth(root.lChild), maxDepth(root.rChild))  + 1;
+    private int maxDepth(TreeNode root) {
+        return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right))  + 1;
     }
 }
