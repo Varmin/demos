@@ -1,6 +1,7 @@
 package com.varmin.project;
 
 
+import com.varmin.project.algorithm.SortChapter;
 import com.varmin.project.algorithm.TreeRealm;
 import com.varmin.project.java.generic.GenericMain;
 import com.varmin.project.kotlin.MainKotlin;
@@ -42,7 +43,7 @@ public class MyClass {
         //new ArrayRealm().run();
 //        new CharRealm().run();
 //        new NodeRealm().run();
-        new TreeRealm().run();
-
+//        new TreeRealm().run();
+        new SortChapter().run();
     }
 }

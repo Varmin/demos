@@ -44,6 +44,7 @@ dependencies {
         implementation project(":modules:modulemain")
         implementation project(":modules:modulelogin")
         implementation project(":modules:modulechat")
+        implementation project(":modules:opensdk")
     }
 
 }
