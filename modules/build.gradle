@@ -40,10 +40,13 @@ dependencies {
 
     if (IS_APPLICATION) {
         implementation project(":modules:ModuleBase")
+        implementation project(":modules:opensdk")
     }else {
         implementation project(":modules:modulemain")
         implementation project(":modules:modulelogin")
         implementation project(":modules:modulechat")
+
+        implementation project(":modules:ModuleBase")
         implementation project(":modules:opensdk")
     }
 

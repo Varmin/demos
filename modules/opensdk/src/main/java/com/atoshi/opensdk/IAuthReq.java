@@ -7,24 +7,12 @@ package com.atoshi.opensdk;
  */
 public interface IAuthReq {
     /**
-     * 是否安装Atoshi客户端
-     * @return
+     * 检查是否安装Atoshi客户端和版本是否满足功能
      */
-    boolean isAtoshiInstalled();
-
+    boolean checkAtoshiApp();
     /**
-     * 检查Atoshi客户端版本号是否可用
-     * @return
-     */
-    boolean checkAtoshiVersionUsable();
-
-    /**
-     * 发送认证申请
+     * 发送认证申请，调起Atoshi客户端
      * @param clientId 客户端id，Atoshi服务提供
      */
     void sendAuthReq(String clientId);
-
-//    void getAccessToken(String code);
-//
-//    void getUserInfo();
 }

@@ -1,8 +1,6 @@
 package com.varmin.modules
 
 import com.varmin.modulebase.BaseActivity
-import com.varmin.libutils.startAndFinish
-import com.varmin.modulemain.MainActivityMain
 
 /**
 * created by HY on 2020/6/25
@@ -14,7 +12,5 @@ class MainActivityModules : BaseActivity() {
     override fun initView() {
     }
     override fun initData() {
-        startAndFinish(MainActivityMain::class.java)
-
     }
 }
