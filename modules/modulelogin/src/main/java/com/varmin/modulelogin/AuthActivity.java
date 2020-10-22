@@ -26,8 +26,10 @@ public class AuthActivity extends AppCompatActivity implements IAuthResp {
         authResp.parseExtra();
 
         findViewById(R.id.btnAuth).setOnClickListener(v -> {
+//            startActivity(new Intent(AuthActivity.this, MainActivityLogin.class));
             getCode(authResp.getClientID());
         });
+        Log.d(TAG, "onCreate: isInited = "+AppLogin.isInited);
     }
 
     @Override

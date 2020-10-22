@@ -31,18 +31,20 @@ public class AuthResp{
         return clientID;
     }
 
+    /**
+     * 解析第三方App传递的信息
+     */
     public void parseExtra() {
         Bundle bundle = mAct.getIntent().getExtras();
         if (bundle != null) {
             clientID = bundle.getString(AuthReq.EXTRA_CLIENT_ID);
             targetPackgeName = bundle.getString(AuthReq.EXTRA_PACKAGE_NAME);
             Log.d(TAG, "parseExtra: clientId = "+clientID);
-            //mAuthResp.getCode(clientID);
         }
     }
 
     /**
-     *
+     * 认证完成跳转第三方App
      * @plaram status 0失败，1成功
      * @param errMsg 0时设置
      * @param code 1时设置
@@ -69,7 +71,8 @@ public class AuthResp{
         intent.putExtra(AuthReq.EXTRA_ERRMSG, errMsg);
         // TODO: yang 2020/10/22 加密、解密：到也没太大必要
         intent.putExtra(AuthReq.EXTRA_AUTH_CODE, code);
-        mAct.startActivity(intent);
+
         mAct.finish();
+        mAct.startActivity(intent);
     }
 }

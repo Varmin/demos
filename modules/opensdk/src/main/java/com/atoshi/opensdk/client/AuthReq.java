@@ -20,18 +20,33 @@ public class AuthReq{
     private static final String TAG = "AuthReq";
     private final Context mContext;
 
+    /**
+     * 提示信息
+     */
     public String ALERT_NEED_INSTALL_ATOSHI = "请先安装Atoshi客户端";
     public String ALERT_UPDATE_INSTALL_ATOSHI = "请先更新Atoshi客户端";
 
+    /**
+     * 在Atoshi平台申请的clientId
+     */
+    public static final String CLIENT_ID = "1234567890";
+    /**
+     * 跳转Atoshi信息
+     */
+    private final int MIN_VERSION_CODE = 90;
     private final String PACKAGE_NAME = "com.varmin.modulelogin";
     private String TARGET_CLASS_NAME = null;
+    //Atoshi Manifest文件配置信息
     private final String META_ATOSHI_AUTH_ACTIVITY = "META_ATOSHI_AUTH_ACTIVITY";
-    public static final String META_THIRD_AUTH_ACTIVITY = "META_THIRD_AUTH_ACTIVITY";
-    private final int MIN_VERSION_CODE = 90;
-
-    public static final String CLIENT_ID = "1234567890";
-    public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
     public static final String EXTRA_CLIENT_ID = "extra_client_id";
+    /**
+     * 跳转第三方应用信息
+     */
+    //第三方 Manifest文件配置信息，Atoshi跳转第三方使用
+    public static final String META_THIRD_AUTH_ACTIVITY = "META_THIRD_AUTH_ACTIVITY";
+    //第三方包名
+    public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
+    //返回认证后的信息
     public static final String EXTRA_STATUS = "extra_status";
     public static final String EXTRA_ERRMSG = "extra_errmsg";
     public static final String EXTRA_AUTH_CODE = "extra_auth_code";
@@ -65,7 +80,9 @@ public class AuthReq{
 
     //todo 分别判断：安装、版本； 提示信息等
 
+
     /**
+     * 跳转Atoshi
      * 使用Intent直接打开Atoshi页面，防止使用action被恶意调起其它App
      * @param clientId 客户端id，Atoshi服务提供
      */
@@ -89,6 +106,11 @@ public class AuthReq{
         }
     }
 
+    /**
+     * 处理Atoshi返回过来的信息
+     * @param intent
+     * @param authReq
+     */
     public void handleIntent(Intent intent, IAuthReq authReq){
         if (intent != null && intent.getExtras() != null) {
             Bundle bundle = intent.getExtras();

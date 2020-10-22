@@ -3,6 +3,7 @@
     package="com.varmin.modulelogin">
 
     <application
+        android:name=".AppLogin"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,6 @@
         <activity android:name=".MainActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -21,9 +21,11 @@
         <!--SDK获取认证页面className-->
         <meta-data android:name="META_ATOSHI_AUTH_ACTIVITY" android:value="${applicationId}.AuthActivity"/>
         <activity android:name=".AuthActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:exported="true"
+            android:taskAffinity=".authsdk"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
             />
     </application>
 
