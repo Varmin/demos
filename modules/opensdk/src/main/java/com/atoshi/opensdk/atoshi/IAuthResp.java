@@ -1,4 +1,4 @@
-package com.atoshi.opensdk;
+package com.atoshi.opensdk.atoshi;
 
 /**
  * author：yang
@@ -6,4 +6,5 @@ package com.atoshi.opensdk;
  * description: 返回认证信息接口
  */
 public interface IAuthResp {
+    void getCode(String clientId);
 }

@@ -9,7 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivityModules">
+
+        <!--SDK获取认证页面className-->
+        <meta-data android:name="META_THIRD_AUTH_ACTIVITY" android:value="${applicationId}.MainActivityModules"/>
+        <activity android:name=".MainActivityModules"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,5 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".AuthActivity">
 
-
+    <Button
+        android:id="@+id/btnAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auth"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

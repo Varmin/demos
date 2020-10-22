@@ -17,7 +17,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AuthActivity"/>
+
+        <!--SDK获取认证页面className-->
+        <meta-data android:name="META_ATOSHI_AUTH_ACTIVITY" android:value="${applicationId}.AuthActivity"/>
+        <activity android:name=".AuthActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.atoshi.opensdk">
 
-    <application>
-        <activity android:name=".atoshi.AuthActivity"></activity>
-    </application>
+    <application></application>
 
 </manifest>
