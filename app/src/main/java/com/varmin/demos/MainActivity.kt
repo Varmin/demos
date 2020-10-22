@@ -1,10 +1,9 @@
 package com.varmin.demos
 
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.varmin.demos.others.ProfileActivity
+import com.varmin.libutils.start
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -13,5 +12,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        start(ProfileActivity::class.java)
     }
 }
