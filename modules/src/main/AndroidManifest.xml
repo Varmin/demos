@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <!--SDK获取认证页面className-->
-        <meta-data android:name="META_THIRD_AUTH_ACTIVITY" android:value="${applicationId}.MainActivityModules"/>
+        <meta-data android:name="META_THIRD_ATOSHI_AUTH_ACTIVITY" android:value="${applicationId}.MainActivityModules"/>
         <activity android:name=".MainActivityModules"
             android:exported="true"
             android:launchMode="singleTask"

@@ -1,35 +1,31 @@
 package com.varmin.modulelogin;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-
+import android.widget.Button;
+import com.atoshi.opensdk.RespBean;
 import com.atoshi.opensdk.atoshi.AuthResp;
 import com.atoshi.opensdk.atoshi.IAuthResp;
-import com.atoshi.opensdk.client.AuthReq;
 
 public class AuthActivity extends AppCompatActivity implements IAuthResp {
     private static final String TAG = "AuthActivity";
     private AuthResp authResp;
+    private Button btnAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
+        Log.d(TAG, "onCreate: ");
 
         authResp = new AuthResp(this);
-        Log.d(TAG, "onCreate: ");
-        authResp.parseExtra();
+        authResp.handleIntent(getIntent(), this);
 
-        findViewById(R.id.btnAuth).setOnClickListener(v -> {
-//            startActivity(new Intent(AuthActivity.this, MainActivityLogin.class));
-            getCode(authResp.getClientID());
-        });
-        Log.d(TAG, "onCreate: isInited = "+AppLogin.isInited);
+        btnAuth = findViewById(R.id.btnAuth);
+        btnAuth.setOnClickListener(v -> getCode());
     }
 
     @Override
@@ -37,13 +33,21 @@ public class AuthActivity extends AppCompatActivity implements IAuthResp {
         super.onNewIntent(intent);
         setIntent(intent);
         Log.d(TAG, "onNewIntent: ");
-        authResp.parseExtra();
+        authResp.handleIntent(intent, this);
     }
 
     @Override
-    public void getCode(String clientId) {
+    public void getCode() {
+        String clientId = authResp.getClientID();
         new Handler().postDelayed(() -> {
-            authResp.sendCode("1", null,"CODE1234IOP890");
+            authResp.sendCode(RespBean.CODE_OK, null,"CODE1234IOP890");
         }, 2000);
+    }
+
+    @Override
+    public void getThirdAppInfo(String clientId) {
+        new Handler().postDelayed(() -> {
+            btnAuth.setText("网赚App");
+        }, 1000);
     }
 }
