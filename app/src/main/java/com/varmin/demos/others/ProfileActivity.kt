@@ -1,6 +1,5 @@
 package com.varmin.demos.others
 
-import androidx.recyclerview.widget.ListAdapter
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.varmin.demos.BaseActivity
