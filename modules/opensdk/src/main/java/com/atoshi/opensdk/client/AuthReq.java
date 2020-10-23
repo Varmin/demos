@@ -6,119 +6,81 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
-
-import com.atoshi.opensdk.AuthBean;
+import com.atoshi.opensdk.RespBean;
+import static com.atoshi.opensdk.Constants.*;
 
 /**
  * author：yang
  * created on：2020/10/20 17:04
- * description: 发送认证信息
+ * description: 三方App发送认证信息
  */
 public class AuthReq{
     private static final String TAG = "AuthReq";
     private final Context mContext;
+    private final String mClientId;
 
-    /**
-     * 提示信息
-     */
-    public String ALERT_NEED_INSTALL_ATOSHI = "请先安装Atoshi客户端";
-    public String ALERT_UPDATE_INSTALL_ATOSHI = "请先更新Atoshi客户端";
-
-    /**
-     * 在Atoshi平台申请的clientId
-     */
-    public static final String CLIENT_ID = "1234567890";
-    /**
-     * 跳转Atoshi信息
-     */
-    private final int MIN_VERSION_CODE = 90;
-    private final String PACKAGE_NAME = "com.varmin.modulelogin";
-    private String TARGET_CLASS_NAME = null;
-    //Atoshi Manifest文件配置信息
-    private final String META_ATOSHI_AUTH_ACTIVITY = "META_ATOSHI_AUTH_ACTIVITY";
-    public static final String EXTRA_CLIENT_ID = "extra_client_id";
-    /**
-     * 跳转第三方应用信息
-     */
-    //第三方 Manifest文件配置信息，Atoshi跳转第三方使用
-    public static final String META_THIRD_AUTH_ACTIVITY = "META_THIRD_AUTH_ACTIVITY";
-    //第三方包名
-    public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
-    //返回认证后的信息
-    public static final String EXTRA_STATUS = "extra_status";
-    public static final String EXTRA_ERRMSG = "extra_errmsg";
-    public static final String EXTRA_AUTH_CODE = "extra_auth_code";
-
-    public AuthReq(Context context){
+    public AuthReq(Context context, String clientId){
         this.mContext = context;
+        this.mClientId = clientId;
     }
 
-    public boolean checkAtoshiApp() {
+    /**
+     * 检查Atoshi客户端
+     * @return -1: 未安装，0：Atoshi版本号小，1：符合唤起条件
+     */
+    public int checkAtoshiApp() {
         try {
             PackageInfo packInfo = this.mContext.getPackageManager().getPackageInfo(PACKAGE_NAME, PackageManager.GET_CONFIGURATIONS);
             if (packInfo != null) {
-                if (packInfo.versionCode < MIN_VERSION_CODE) {
-                    Toast.makeText(mContext, ALERT_UPDATE_INSTALL_ATOSHI, Toast.LENGTH_SHORT).show();
-                    return false;
-                }else {
-                    return true;
-                }
+                return packInfo.versionCode < MIN_VERSION_CODE ? 0 : 1;
             }else{
-                Toast.makeText(mContext, ALERT_NEED_INSTALL_ATOSHI, Toast.LENGTH_SHORT).show();
-                return false;
+                return -1;
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            Toast.makeText(mContext, ALERT_NEED_INSTALL_ATOSHI, Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
+        }catch (Exception e){
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
-
-    //todo 分别判断：安装、版本； 提示信息等
 
 
     /**
      * 跳转Atoshi
      * 使用Intent直接打开Atoshi页面，防止使用action被恶意调起其它App
-     * @param clientId 客户端id，Atoshi服务提供
      */
-    public void sendAuthReq(String clientId) {
-        if (checkAtoshiApp()) {//todo 不应做过多提示，或让其复写
+    public void sendAuthReq() {
+        if (checkAtoshiApp() > 0) {
+            String targetClassName = null;
             try {
-                TARGET_CLASS_NAME = mContext.getPackageManager()
+                targetClassName = mContext.getPackageManager()
                         .getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA)
                         .metaData.getString(META_ATOSHI_AUTH_ACTIVITY);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-            if (TextUtils.isEmpty(TARGET_CLASS_NAME)) {
-                return;
-            }
+
+            if (TextUtils.isEmpty(targetClassName))  return;
             Intent intent = new Intent();
-            intent.setClassName(PACKAGE_NAME, TARGET_CLASS_NAME);
-            intent.putExtra(EXTRA_CLIENT_ID, clientId);
+            intent.setClassName(PACKAGE_NAME, targetClassName);
             intent.putExtra(EXTRA_PACKAGE_NAME, mContext.getPackageName());
+            intent.putExtra(EXTRA_CLIENT_ID, mClientId);
             mContext.startActivity(intent);
+        }else {
+            Toast.makeText(mContext, "请确认Atoshi客户端", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
      * 处理Atoshi返回过来的信息
-     * @param intent
-     * @param authReq
      */
     public void handleIntent(Intent intent, IAuthReq authReq){
         if (intent != null && intent.getExtras() != null) {
             Bundle bundle = intent.getExtras();
-            String clientId = bundle.getString(EXTRA_CLIENT_ID, null);
-            if (TextUtils.equals(CLIENT_ID, clientId)) {
-                AuthBean bean = new AuthBean();
-                bean.status = bundle.getString(EXTRA_STATUS);
-                bean.errMsg = bundle.getString(EXTRA_ERRMSG);
+            String clientId = bundle.getString(EXTRA_CLIENT_ID);
+            if (TextUtils.equals(mClientId, clientId)) {
+                RespBean bean = new RespBean();
+                bean.status = bundle.getInt(EXTRA_STATUS);
+                bean.errMsg = bundle.getString(EXTRA_ERR_MSG);
                 bean.code = bundle.getString(EXTRA_AUTH_CODE);
                 authReq.onResp(bean);
             }

@@ -3,7 +3,7 @@ package com.varmin.modules
 import android.content.Intent
 import android.text.TextUtils
 import android.widget.Toast
-import com.atoshi.opensdk.AuthBean
+import com.atoshi.opensdk.RespBean
 import com.atoshi.opensdk.client.AuthReq
 import com.atoshi.opensdk.client.IAuthReq
 import com.varmin.modulebase.BaseActivity
@@ -15,31 +15,30 @@ import kotlinx.android.synthetic.main.activity_main_demo.*
 */
 class MainActivityModules : BaseActivity(), IAuthReq {
     private lateinit var sendAuth: AuthReq
+    private val CLIENT_ID = "client_id: WED34587EDX"
 
     override fun getLayoutId(): Int = R.layout.activity_main_demo
 
     override fun initView() {
-        sendAuth = AuthReq(this)
+        sendAuth = AuthReq(this, CLIENT_ID)
         sendAuth.handleIntent(intent, this)
+
         btnAuth.setOnClickListener {
-            sendAuth.sendAuthReq(AuthReq.CLIENT_ID)
+            sendAuth.sendAuthReq()
         }
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        intent?.run {
-            sendAuth.handleIntent(intent, this@MainActivityModules)
-        }
+        sendAuth.handleIntent(intent, this@MainActivityModules)
     }
 
-    override fun initData() {
-    }
+    override fun initData() {}
 
-    override fun onResp(bean: AuthBean) {
-        if (TextUtils.equals("0", bean.status)) {
+    override fun onResp(bean: RespBean) {
+        if (bean.status == RespBean.CODE_ERR) {
             Toast.makeText(this, bean.errMsg.toString(), Toast.LENGTH_SHORT).show()
-        }else if(TextUtils.equals("1", bean.status)){
+        }else if(bean.status == RespBean.CODE_OK){
             Toast.makeText(this, bean.code.toString(), Toast.LENGTH_SHORT).show()
         }
     }
